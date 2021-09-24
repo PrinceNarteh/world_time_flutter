@@ -6,11 +6,11 @@ import 'package:world_time/screens/loading.dart';
 void main() {
   runApp(
     MaterialApp(
-      initialRoute: "/",
+      initialRoute: "/location",
       routes: {
         "/": (context) => const Loading(),
         "/home": (context) => const Home(),
-        "location": (context) => const ChooseLocation()
+        "/location": (context) => const ChooseLocation()
       },
     ),
   );

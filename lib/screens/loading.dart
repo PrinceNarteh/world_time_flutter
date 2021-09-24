@@ -11,13 +11,19 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
   void getTime() async {
+    // make the request
     Uri uri = Uri.parse("http://worldtimeapi.org/api/timezone/Europe/Paris");
     Response response = await get(uri);
+
+    // get data from response
     Map data = jsonDecode(response.body);
     String datetime = data['datetime'];
-    String offset = data['utc_offset'];
-    print(datetime);
-    print(offset);
+    String offset = data['utc_offset'].substring(1, 3);
+
+    // create DateTime object
+    DateTime now = DateTime.parse(datetime);
+    now = now.add(Duration(hours: int.parse(offset)));
+    print(now);
   }
 
   @override
@@ -28,8 +34,8 @@ class _LoadingState extends State<Loading> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const Text('Loading Screen'),
+    return const Scaffold(
+      body: Text('Loading Screen'),
     );
   }
 }
